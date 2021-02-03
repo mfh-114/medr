@@ -4,12 +4,6 @@
 # Log file
 *.log
 
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
 # Package Files #
 *.jar
 *.war
@@ -21,3 +15,28 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+# Ignore Gradle project-specific cache directory
+.gradle
+.m2
+
+# Ignore Gradle build output directory
+build
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Eclipse 
+*~
+*.swp
+.settings/
+.classpath
+.project
+temp/
+
+# more caches and things from deploy #
+WEB-INF/deploy/
+WEB-INF/classes/
