@@ -1,5 +1,6 @@
 # medr
 
+
 Medication Reminder (Medr) is a medication reminder. It will remind user to take medication on time.  
 The main purpose of this project to learn Sturts2. 
 
