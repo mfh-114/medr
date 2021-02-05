@@ -1,12 +1,12 @@
-#User stories
+# User stories
 
-##version 0.1.0
+## version 1.0
 
-###Epic
+### Epic
 
 Basic features of the system and architectural foundation. 
 
-####Stories
+#### Stories
 
     1. User will input login id and password to access system.
     
@@ -17,7 +17,5 @@ Basic features of the system and architectural foundation.
     4. User can view the prescription and entire list of medicines information.
     
     5. User will receive notification to take the medicine. 
-    
-
-
-
+   
+ 
