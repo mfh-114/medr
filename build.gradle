@@ -26,7 +26,10 @@ targetCompatibility = 1.8
 
 dependencies {
 
+    implementation 'org.apache.struts:struts2-core:2.5.26'
+
     // Use JUnit test framework
     testImplementation 'junit:junit:4.13'
+    
 }
 
