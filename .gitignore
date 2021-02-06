@@ -40,3 +40,4 @@ temp/
 # more caches and things from deploy #
 WEB-INF/deploy/
 WEB-INF/classes/
+/bin/
