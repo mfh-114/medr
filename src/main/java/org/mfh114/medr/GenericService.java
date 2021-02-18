@@ -1,7 +1,18 @@
 package org.mfh114.medr;
 
-public interface GenericService {
+/***
+ * This generic service type. Service class must implements request model to
+ * process the data and return the response to the caller.
+ * 
+ * @author fhaider
+ *
+ * @param <Req> RequestModel type
+ * @param <Res> ResponseMOdel type
+ */
+public interface GenericService<Req extends RequestModel, Res extends ResponseModel> {
 
-	public <T extends DAOBroker> T getBroker();
-	
+	public void setRequestModel(Req requestModel);
+
+	public Res getResponseModel();
+
 }

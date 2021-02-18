@@ -14,7 +14,7 @@
 					 
     <filter>
         <filter-name>struts2</filter-name>
-        <filter-class>org.apache.struts2.dispatcher.FilterDispatcher</filter-class>
+        <filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
         
         <!-- The action packages parameter tells the filter which packages to scan 
         		 for Action classes during initialization.  If it finds declarations 
@@ -51,7 +51,7 @@
     </filter-mapping>
         
     <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
  
  
