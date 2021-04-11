@@ -22,5 +22,6 @@
 		
     <include file="authn-struts.xml"/>
   
+  	<include file="dashboard-struts.xml" />
 
 </struts>

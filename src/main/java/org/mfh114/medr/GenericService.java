@@ -11,8 +11,5 @@ package org.mfh114.medr;
  */
 public interface GenericService<Req extends RequestModel, Res extends ResponseModel> {
 
-	public void setRequestModel(Req requestModel);
-
-	public Res getResponseModel();
-
+	
 }

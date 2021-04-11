@@ -1,58 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
-                             http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                             http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
 
 
-    <display-name>Medication Reminder (MEDR)</display-name>
+	<display-name>Medication Reminder (MEDR)</display-name>
 
-		<!-- Declaration of the Struts 2 filter.  Since our entire web application will be a Struts 2
-					application, we will not have any other servlets or filters.  Of course, real Struts 2 
-					applications may also have other servlets or filters, but since we are doing only Struts 2
-					stuff in this example, we need only define the Struts 2 filter.  -->
-					 
-    <filter>
-        <filter-name>struts2</filter-name>
-        <filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
-        
-        <!-- The action packages parameter tells the filter which packages to scan 
-        		 for Action classes during initialization.  If it finds declarations 
-        		 of classes in these packages that implement the Action interface, or
-        		 have names ending in 'Action', it will scan them for configuration related
-        		 annotations.  This provides an alternative configuration mechanism to 
-        		 XML files.
-        		 
-        		 By default, the action's will be configured under a namespace that matches
-        		 the sub-packages, relative to the packages listed in the param below, of the
-        		 action.  
-        		 
-        		 Note, this annotation base configuration is the preferred method for configuration
-        		 but we will use XML files for portions of this book since the file provides a 
-        		 convenient one-stop overview of an application's architecture.
-       -->
-        <init-param>
-     			<param-name>actionPackages</param-name>
-    			<param-value>manning</param-value>
-  			</init-param>  
-    </filter>
-    
-  
- 		<!-- The Struts 2 filter should be mapped to ALL requests coming into the web application.  As a filter,
-				 it can let the non-struts requests pass through and they will arrive at which ever servlets to which
-				 they may be mapped.  Of course, this sample app has no other servlets, so we expect the filter to catch 
-				 everything.  When the filter recognizes a Struts 2 request, typically by the .action extension, the 
-				 normal filter chaining of a web application is aborted and the request is completely handled by
-				 the Struts 2 system. -->
-				 
-    <filter-mapping>
-        <filter-name>struts2</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-        
-    <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>
- 
- 
+	<!-- Declaration of the Struts 2 filter. Since our entire web application 
+		will be a Struts 2 application, we will not have any other servlets or filters. 
+		Of course, real Struts 2 applications may also have other servlets or filters, 
+		but since we are doing only Struts 2 stuff in this example, we need only 
+		define the Struts 2 filter. -->
+
+
+   <!--
+	<context-param>
+		<param-name>isLog4jAutoInitializationDisabled</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>log4jContextName</param-name>
+		<param-value>medr</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>log4jConfiguration</param-name>
+		<param-value>file:////opt/wildfly/current_wildfly/standalone/configuration/apps/medr/log4j2.xml</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.apache.logging.log4j.web.Log4jServletContextListener</listener-class>
+	</listener>
+
+	<filter>
+		<filter-name>log4jServletFilter</filter-name>
+		<filter-class>org.apache.logging.log4j.web.Log4jServletFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>log4jServletFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+	</filter-mapping> -->
+
+	<listener>
+		<listener-class>org.mfh114.medr.servlet.Log4J2ConfigLoader</listener-class>
+	</listener>
+	
+	<listener>
+		<listener-class>org.mfh114.medr.servlet.CacheServletContextListener</listener-class>
+	</listener>	
+	
+
+<resource-ref>
+    <res-ref-name>infinispan/DataCache</res-ref-name>
+    <lookup-name>java:jboss/infinispan/container/appCacheContainer</lookup-name>
+</resource-ref>
+
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
+
+		<!-- The action packages parameter tells the filter which packages to scan 
+			for Action classes during initialization. If it finds declarations of classes 
+			in these packages that implement the Action interface, or have names ending 
+			in 'Action', it will scan them for configuration related annotations. This 
+			provides an alternative configuration mechanism to XML files. By default, 
+			the action's will be configured under a namespace that matches the sub-packages, 
+			relative to the packages listed in the param below, of the action. Note, 
+			this annotation base configuration is the preferred method for configuration 
+			but we will use XML files for portions of this book since the file provides 
+			a convenient one-stop overview of an application's architecture. -->
+		<init-param>
+			<param-name>actionPackages</param-name>
+			<param-value>manning</param-value>
+		</init-param>
+	</filter>
+
+
+	<!-- The Struts 2 filter should be mapped to ALL requests coming into the 
+		web application. As a filter, it can let the non-struts requests pass through 
+		and they will arrive at which ever servlets to which they may be mapped. 
+		Of course, this sample app has no other servlets, so we expect the filter 
+		to catch everything. When the filter recognizes a Struts 2 request, typically 
+		by the .action extension, the normal filter chaining of a web application 
+		is aborted and the request is completely handled by the Struts 2 system. -->
+
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+
 </web-app>

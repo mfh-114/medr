@@ -4,21 +4,21 @@ import org.mfh114.medr.ResponseModel;
 
 public class AuthnResponse implements ResponseModel {
 
-	private Boolean isAuthenticationValid;
+	private Boolean isCrendentialValid;
 
-	public Boolean getIsAuthenticationValid() {
-		return isAuthenticationValid;
+	public Boolean getIsCrendentialValid() {
+		return isCrendentialValid;
 	}
 
-	public void setIsAuthenticationValid(Boolean isAuthenticationValid) {
-		this.isAuthenticationValid = isAuthenticationValid;
+	public void setIsCrendentialValid(Boolean isCrendentialValid) {
+		this.isCrendentialValid = isCrendentialValid;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("AuthnResponse [isAuthenticationValid=");
-		builder.append(isAuthenticationValid);
+		builder.append("AuthnResponse [isCrendentialValid=");
+		builder.append(isCrendentialValid);
 		builder.append("]");
 		return builder.toString();
 	}

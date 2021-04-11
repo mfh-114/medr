@@ -1,31 +1,37 @@
 package org.mfh114.medr.authn.service;
 
-import org.mfh114.medr.DAOBroker;
-import org.mfh114.medr.GenericService;
-import org.mfh114.medr.authn.dao.AuthnDAOBroker;
+import org.mfh114.medr.authn.dao.AuthnDataBroker;
+import org.mfh114.medr.authn.dao.AuthnDataBrokerImpl;
 import org.mfh114.medr.authn.domainBean.AuthnRequest;
 import org.mfh114.medr.authn.domainBean.AuthnResponse;
-
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
+import org.mfh114.medr.authn.dto.UserDTO;
 
 public class AuthenticationService implements AuthnService {
 
 	@Override
-	public void setRequestModel(AuthnRequest requestModel) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public AuthnResponse getResponseModel() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public AuthnResponse authenticate(AuthnRequest authnRequest) {
-		// TODO Auto-generated method stub
-		return null;
+
+		String userName = authnRequest.getUserName();
+		String passwd = authnRequest.getPassword();
+
+		UserDTO user = getAuthnDAOBroker().getUser(userName, passwd);
+
+		AuthnResponse res = new AuthnResponse();
+		if (user == null) {
+			res.setIsCrendentialValid(false);
+		} else {
+			res.setIsCrendentialValid(true);
+		}
+
+		return res;
 	}
+
+	@Override
+	public AuthnDataBroker getAuthnDAOBroker() {
+		// TODO Auto-generated method stub
+		return new AuthnDataBrokerImpl();
+	}
+
+
 
 }

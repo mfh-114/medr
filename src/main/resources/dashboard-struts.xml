@@ -10,7 +10,7 @@
 		this case, we will group them based upon their relationship as that pertain 
 		to the same chapter in the book. A more natural grouping for real world applications 
 		would be by more functional aspects. -->
-	<package name="authn" namespace="/authn"
+	<package name="dashboard" namespace="/dashboard"
 		extends="struts-default">
 
 		<!-- This is just the jsp page that presents the initial form to collect 
@@ -19,18 +19,11 @@
 			is recommended as a best practice for a variety of reasons including architectural 
 			consistency and a logical naming buffer between the request namespace and 
 			the actual jsp locations. -->
-		<action name="login">
-			<result>/jsp/authn/login.jsp</result>
+		
+		<action name="display" class="org.mfh114.medr.dashboard.web.DisplayDashboardAction">
+			<result name="success">/jsp/dashboard/dashboard.jsp</result>
 		</action>
-
-		<action name="authentication"
-			class="org.mfh114.medr.authn.web.AuthenticationAction">
-			<!-- Redirect because we are sending request to another action class not 
-				own JSP So, sendRedirect is required, Browser will resend the request to 
-				dashboard/display action class. -->
-			<result name="success" type="redirect">/dashboard/display</result>
-			<result name="input">/jsp/authn/login.jsp</result>
-		</action>
+		
 
 	</package>
 
